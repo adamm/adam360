@@ -1,4 +1,33 @@
 extends layout.pug
 
 block content
-    h2 Welcome!
+    h1= title
+    each text in textList
+        p= text
+    input(type='hidden' name='answerIds' value=answerIds)
+    table
+        each q in questionList
+            tr
+                td
+                    p= q.text
+            tr
+                td
+                    - if (q.type == 'open')
+                        textarea(name='answer_' + q.id)
+                    - else if (q.type == 'closed')
+                        input(type='radio' id='answer_' + q.id + '_sa' name='answer_' + q.id value='strongly-agree')
+                        label(for='answer_' + q.id + '_sa')
+                            | Strongly Agree
+                        input(type='radio' id='answer_' + q.id + '_a' name='answer_' + q.id value='agree')
+                        label(for='answer_' + q.id + '_a')
+                            | Agree
+                        input(type='radio' id='answer_' + q.id + '_n' name='answer_' + q.id value='neutral')
+                        label(for='answer_' + q.id + '_n')
+                            | Neutral
+                        input(type='radio' id='answer_' + q.id + '_d' name='answer_' + q.id value='disagree')
+                        label(for='answer_' + q.id + '_d')
+                            | Disagree
+                        input(type='radio' id='answer_' + q.id + '_sd' name='answer_' + q.id value='strongly-disagree')
+                        label(for='answer_' + q.id + '_sd')
+                            | Strongly Disagree
+    include nav.pug

@@ -1,0 +1,10 @@
+table()
+    tr 
+        td(style="width: 100px")
+            - if(page > 0)
+                button(name='nav' value='prev')
+                    | Prev Page
+        td(style="width: 100px")
+            - if (!lastPage)
+                button(name='nav' value='next')
+                    | Next Page

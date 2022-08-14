@@ -41,7 +41,7 @@ db.connect().then(pool => {
         console.log(`> ${fields.join(' ')}`);
         next();
     });
-    app.get('/', router);
+    app.all('/', router);
     app.use(express.static(path.join(__dirname, 'public')));
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}...`);
