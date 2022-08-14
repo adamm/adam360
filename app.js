@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 const express = require('express');
+const session = require('express-session');
+const MysqlStore = require('express-mysql-session')(session);
 const path = require('path');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
@@ -19,6 +21,15 @@ app.use(bodyParser.json());
 app.use(cors());
 
 db.connect().then(pool => {
+    let mysqlStore = new MysqlStore({}, pool);
+
+    app.use(session({
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        store: mysqlStore,
+    }));
+
     app.use((req, res, next) => {
         res.locals.db = db;
         res.locals.pool = db.pool;
