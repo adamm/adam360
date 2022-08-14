@@ -10,6 +10,7 @@ const logger = require('morgan');
 const cors = require('cors');
 
 const db = require('./db.js');
+let router = require('./router.js');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -19,6 +20,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.set('view engine', 'pug');
 
 db.connect().then(pool => {
     let mysqlStore = new MysqlStore({}, pool);
@@ -39,23 +41,12 @@ db.connect().then(pool => {
         console.log(`> ${fields.join(' ')}`);
         next();
     });
-    app.get('/', get_index);
+    app.get('/', router);
     app.use(express.static(path.join(__dirname, 'public')));
     app.listen(PORT, () => {
         console.log(`Server listening on port ${PORT}...`);
     });
 });
-
-
-
-
-function get_index (req, res) {
-    // TODO if 360 is closed, display a closed.html instead
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-}
-
-
-
 
 process.on('SIGINT', () => {
     console.log('Shutting down');
