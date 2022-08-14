@@ -28,6 +28,7 @@ db.connect().then(pool => {
     app.use(session({
         secret: process.env.SESSION_SECRET,
         resave: false,
+        cookie: { maxAge: 2592000000 }, // 30 days
         saveUninitialized: true,
         store: mysqlStore,
     }));
