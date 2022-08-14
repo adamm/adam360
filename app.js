@@ -39,9 +39,8 @@ db.connect().then(pool => {
 
 
 function get_index (req, res) {
-    let now = new Date();
-
-    res.send(now.toString());
+    // TODO if 360 is closed, display a closed.html instead
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 }
 
 
