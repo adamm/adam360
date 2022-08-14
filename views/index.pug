@@ -4,7 +4,7 @@ block content
     h1= title
     each text in textList
         p= text
-    input(type='hidden' name='answerIds' value=answerIds)
+    input(type='hidden' name='questionIds' value=questionIds)
     table
         each q in questionList
             tr
@@ -13,21 +13,22 @@ block content
             tr
                 td
                     - if (q.type == 'open')
-                        textarea(name='answer_' + q.id)
+                        textarea(name='question_'+q.id+'_'+q.response_id)
+                            =q.response_text
                     - else if (q.type == 'closed')
-                        input(type='radio' id='answer_' + q.id + '_sa' name='answer_' + q.id value='strongly-agree')
-                        label(for='answer_' + q.id + '_sa')
+                        input(type='radio' id='question_'+q.id+'_sa' name='question_'+q.id+'_'+q.response_id value='strongly-agree' checked=q.response_text=='strongly-agree')
+                        label(for='question_'+q.id+'_sa')
                             | Strongly Agree
-                        input(type='radio' id='answer_' + q.id + '_a' name='answer_' + q.id value='agree')
-                        label(for='answer_' + q.id + '_a')
+                        input(type='radio' id='question_'+q.id+'_a' name='question_'+q.id+'_'+q.response_id value='agree' checked=q.response_text=='agree')
+                        label(for='question_'+q.id+'_a')
                             | Agree
-                        input(type='radio' id='answer_' + q.id + '_n' name='answer_' + q.id value='neutral')
-                        label(for='answer_' + q.id + '_n')
+                        input(type='radio' id='question_'+q.id+'_n' name='question_'+q.id+'_'+q.response_id value='neutral' checked=q.response_text=='neutral')
+                        label(for='question_'+q.id+'_n')
                             | Neutral
-                        input(type='radio' id='answer_' + q.id + '_d' name='answer_' + q.id value='disagree')
-                        label(for='answer_' + q.id + '_d')
+                        input(type='radio' id='question_'+q.id+'_d' name='question_'+q.id+'_'+q.response_id value='disagree' checked=q.response_text=='disagree')
+                        label(for='question_'+q.id+'_d')
                             | Disagree
-                        input(type='radio' id='answer_' + q.id + '_sd' name='answer_' + q.id value='strongly-disagree')
-                        label(for='answer_' + q.id + '_sd')
+                        input(type='radio' id='question_'+q.id+'_sd' name='question_'+q.id+'_'+q.response_id value='strongly-disagree' checked=q.response_text=='strongly-disagree')
+                        label(for='question_'+q.id+'_sd')
                             | Strongly Disagree
     include nav.pug
