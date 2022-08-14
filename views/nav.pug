@@ -1,10 +1,14 @@
-table()
+table(class='nav')
     tr 
-        td(style="width: 100px")
+        td(class="prev")
             - if(page > 0)
                 button(name='nav' value='prev')
-                    | Prev Page
-        td(style="width: 100px")
-            - if (!lastPage)
+                    | &larr; Previous
+        td(class="start")
+            - if (startPage)
                 button(name='nav' value='next')
-                    | Next Page
+                    | Start
+        td(class="next")
+            - if (!lastPage && !startPage)
+                button(name='nav' value='next')
+                    | Next &rarr;

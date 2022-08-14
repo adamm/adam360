@@ -17,6 +17,7 @@ exports.get_index = function (req, res) {
     if (req.session.page <= 0) {
         tmpl.title = "Welcome";
         tmpl.textList = ['Thank you for participating in Adam\'s 360 review.  Please provide frank responses to this brief questionnaire.'];
+        tmpl.startPage = 1;
     }
     else if (req.session.page >= 1 && req.session.page <= 4) {
         tmpl.title = `Page ${req.session.page} of 4:`;

@@ -5,30 +5,36 @@ block content
     each text in textList
         p= text
     input(type='hidden' name='questionIds' value=questionIds)
-    table
+    table(class='questions')
         each q in questionList
             tr
                 td
-                    p= q.text
+                    p(class='question')= q.text
             tr
                 td
-                    - if (q.type == 'open')
-                        textarea(name='question_'+q.id+'_'+q.response_id)
-                            =q.response_text
-                    - else if (q.type == 'closed')
-                        input(type='radio' id='question_'+q.id+'_sa' name='question_'+q.id+'_'+q.response_id value='strongly-agree' checked=q.response_text=='strongly-agree')
-                        label(for='question_'+q.id+'_sa')
-                            | Strongly Agree
-                        input(type='radio' id='question_'+q.id+'_a' name='question_'+q.id+'_'+q.response_id value='agree' checked=q.response_text=='agree')
-                        label(for='question_'+q.id+'_a')
-                            | Agree
-                        input(type='radio' id='question_'+q.id+'_n' name='question_'+q.id+'_'+q.response_id value='neutral' checked=q.response_text=='neutral')
-                        label(for='question_'+q.id+'_n')
-                            | Neutral
-                        input(type='radio' id='question_'+q.id+'_d' name='question_'+q.id+'_'+q.response_id value='disagree' checked=q.response_text=='disagree')
-                        label(for='question_'+q.id+'_d')
-                            | Disagree
-                        input(type='radio' id='question_'+q.id+'_sd' name='question_'+q.id+'_'+q.response_id value='strongly-disagree' checked=q.response_text=='strongly-disagree')
-                        label(for='question_'+q.id+'_sd')
-                            | Strongly Disagree
+                    div(style="margin: 16px")
+                        - if (q.type == 'open')
+                            textarea(name='question_'+q.id+'_'+q.response_id)
+                                =q.response_text
+                        - else if (q.type == 'closed')
+                            span(class='option')
+                                input(type='radio' id='question_'+q.id+'_sa' name='question_'+q.id+'_'+q.response_id value='strongly-agree' checked=q.response_text=='strongly-agree')
+                                label(for='question_'+q.id+'_sa')
+                                    | Strongly Agree
+                            span(class='option')
+                                input(type='radio' id='question_'+q.id+'_a' name='question_'+q.id+'_'+q.response_id value='agree' checked=q.response_text=='agree')
+                                label(for='question_'+q.id+'_a')
+                                    | Agree
+                            span(class='option')
+                                input(type='radio' id='question_'+q.id+'_n' name='question_'+q.id+'_'+q.response_id value='neutral' checked=q.response_text=='neutral')
+                                label(for='question_'+q.id+'_n')
+                                    | Neutral
+                            span(class='option')
+                                input(type='radio' id='question_'+q.id+'_d' name='question_'+q.id+'_'+q.response_id value='disagree' checked=q.response_text=='disagree')
+                                label(for='question_'+q.id+'_d')
+                                    | Disagree
+                            span(class='option')
+                                input(type='radio' id='question_'+q.id+'_sd' name='question_'+q.id+'_'+q.response_id value='strongly-disagree' checked=q.response_text=='strongly-disagree')
+                                label(for='question_'+q.id+'_sd')
+                                    | Strongly Disagree
     include nav.pug
