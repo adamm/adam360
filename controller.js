@@ -12,20 +12,26 @@ exports.get_index = function (req, res) {
         questionIds: ""
     };
 
-    console.log(req.session.page);
-
     if (req.session.page <= 0) {
-        tmpl.title = "Welcome";
-        tmpl.textList = ['Thank you for participating in Adam\'s 360 review.  Please provide frank responses to this brief questionnaire.'];
+        tmpl.title = "Welcome!";
+        tmpl.textList = [
+            'Hello!  You\'ve been invited to participate in my 360 review, as part of my personal development plan at Canadian Tire.',
+            'Your candid and frank responses to this brief questionnaire will help me identify my gaps and shape my career over the coming years.',
+            'All responses here are anonymous and private.  If you have any questions about this form or my action plan with this information, please reach out to me on Teams or email.',
+            'Feel free to leave any questions blank if you don\'t have an opinion.',
+            'Thank you!',
+            '— Adam McDaniel'
+        ];
         tmpl.startPage = 1;
     }
     else if (req.session.page >= 1 && req.session.page <= 4) {
-        tmpl.title = `Page ${req.session.page} of 4:`;
+        tmpl.title = `Page ${req.session.page} of 4`;
         return show_questions(req, res, tmpl, req.session.page);
     }
     else {
         tmpl.title = "Thank you!";
-        tmpl.textList = ['Thank you for participating in this review.  If you want to change any of your answers, press the button below.'];
+        tmpl.textList = ['Thank you for participating in this review.  Your feedback has been saved.',
+            'If you want to change any of your responses, press the button below.'];
         tmpl.lastPage = 1;
     }
     return res.render("index", tmpl);
